@@ -3,7 +3,7 @@ import Svg, { Path } from 'react-native-svg';
 
 import * as S from './styles';
 
-export function Login() {
+export function SingUp() {
   const [nome, setNome] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
