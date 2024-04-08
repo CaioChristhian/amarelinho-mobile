@@ -69,7 +69,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='SingUp'
+			initialRouteName='Login'
 		>
 			<Stack.Screen
 				name='tab'
