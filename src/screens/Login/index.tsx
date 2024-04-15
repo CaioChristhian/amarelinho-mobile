@@ -13,7 +13,7 @@ export function Login() {
 		console.log('Senha:', password);}
   return (
 	  <View style={styles.container}>
-      <Image source={require('./src/assets/images/logo.png')} style={styles.logo} />
+      {/* <Image source={require('./src/assets/images/logo.png')} style={styles.logo} /> */}
       <Text style={styles.title}>Amarelinho</Text>
       <Text style={styles.title}>Cliente</Text>
       <TextInput

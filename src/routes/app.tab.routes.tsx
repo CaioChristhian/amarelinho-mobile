@@ -8,6 +8,7 @@ import { SingUp } from '../screens/SingUp';
 import { Text } from '../components/Text';
 import { PropsNavigationStack } from './models';
 import { Home } from '../screens/Home';
+import { LogoIcon } from '../components/Icons/LogoIcon';
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
 const Stack = createNativeStackNavigator();
@@ -21,7 +22,7 @@ interface PropsCustomTabBarLabel {
 const CustomTabBarLabel = ({ label, focused, color }: PropsCustomTabBarLabel) => (
 	<>
 		<Text color={color} size={14}>{label}</Text>
-		<View style={{ borderBottomWidth: focused ? 2 : 0, borderBottomColor: '#D73035', width: 12, marginTop: 4 }}></View>
+		<View style={{ borderBottomWidth: focused ? 2 : 0, borderBottomColor: '#A09904', width: 12, marginTop: 4 }}></View>
 	</>
 );
 
@@ -32,13 +33,14 @@ function AppTabRoutes() {
 			screenOptions={{
 				tabBarHideOnKeyboard: true,
 				headerShown: false,
-				tabBarActiveTintColor: '#D73035',
+				tabBarActiveTintColor: '#A09904',
 				tabBarInactiveTintColor: '#666666',
 				tabBarShowLabel: true, // Exibir o texto do tabBarLabel
 				tabBarStyle: {
-					backgroundColor: '#FFFFFF',
+					backgroundColor: '#FCF787',
 					minHeight: 72,
 					paddingBottom: 8,
+
 				},
 				tabBarLabelStyle: {
 					fontSize: 12,
@@ -52,6 +54,11 @@ function AppTabRoutes() {
 				name='Home'
 				component={Home}
 				options={{
+					tabBarIcon: ({ color }) => (
+						<LogoIcon
+							color={color}
+						/>
+					),
 
 					tabBarLabel: ({ focused, color }) => (
 						<CustomTabBarLabel color={color} label='Home' focused={focused} />
@@ -69,7 +76,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='Login'
+			initialRouteName='tab'
 		>
 			<Stack.Screen
 				name='tab'
