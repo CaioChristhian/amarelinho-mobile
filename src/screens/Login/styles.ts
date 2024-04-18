@@ -12,8 +12,10 @@ const styles = StyleSheet.create({
     height: 200,
   },
   title: {
-    fontSize: 20,
-    marginBottom: 20,
+    fontSize: 42,
+    marginBottom: 10,
+    fontStyle: 'italic', 
+    fontWeight: '600', 
   },
   input: {
     width: '80%',
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   forgotPassword: {
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginBottom: 10,
   },
   button: {
