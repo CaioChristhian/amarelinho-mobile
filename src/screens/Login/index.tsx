@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
 export function Login() {
-  const logo = require('../../assets/images/logo.png')
+  const logo = require('../../assets/Images/logo.png')
   const navigation = useNavigation();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
