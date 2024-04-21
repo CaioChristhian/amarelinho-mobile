@@ -5,6 +5,7 @@ export type PropsNavigationStack = {
 	SingUp: undefined;
 	Home: undefined;
 	tab: undefined;
+	ProfileDetailing: undefined;
 }
 
 export type PropsStack = NativeStackNavigationProp<PropsNavigationStack>

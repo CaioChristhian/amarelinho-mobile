@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Login } from '../screens/Login';
 import { SingUp } from '../screens/SingUp';
+import { ProfileDetailing } from '../screens/ProfileDetailing';
 import { Text } from '../components/Text';
 import { PropsNavigationStack } from './models';
 import { Home } from '../screens/Home';
@@ -76,7 +77,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='tab'
+			initialRouteName='ProfileDetailing'
 		>
 			<Stack.Screen
 				name='tab'
@@ -87,9 +88,15 @@ export const AppRoutes = () => {
 				name='Login'
 				component={Login}
 			/>
+
 			<Stack.Screen
 				name='SingUp'
 				component={SingUp}
+			/>
+			
+			<Stack.Screen
+				name='ProfileDetailing'
+				component={ProfileDetailing}
 			/>
 		</Stack.Navigator>
 	);
