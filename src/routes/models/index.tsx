@@ -4,6 +4,7 @@ export type PropsNavigationStack = {
 	Login: undefined;
 	SingUp: undefined;
 	Home: undefined;
+	Profile: undefined;
 	tab: undefined;
 	ProfileDetailing: undefined;
 }

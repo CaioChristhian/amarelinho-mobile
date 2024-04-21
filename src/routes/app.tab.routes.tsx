@@ -8,8 +8,10 @@ import { SingUp } from '../screens/SingUp';
 import { ProfileDetailing } from '../screens/ProfileDetailing';
 import { Text } from '../components/Text';
 import { PropsNavigationStack } from './models';
+import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
 import { LogoIcon } from '../components/Icons/LogoIcon';
+import { ProfileIcon } from '../components/Icons/ProfileIcon';
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
 const Stack = createNativeStackNavigator();
@@ -66,6 +68,22 @@ function AppTabRoutes() {
 					),
 				}}
 			/>
+
+			<Screen
+				name='Profile'
+				component={Profile}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<ProfileIcon
+							color={color} width={24} height={24}
+						/>
+					),
+
+					tabBarLabel: ({ focused, color }) => (
+						<CustomTabBarLabel color={color} label='Profile' focused={focused} />
+					),
+				}}
+			/>
 		</Navigator>
 	);
 }
@@ -92,6 +110,10 @@ export const AppRoutes = () => {
 			<Stack.Screen
 				name='SingUp'
 				component={SingUp}
+			/>
+			<Stack.Screen
+				name='Profile'
+				component={Profile}
 			/>
 			
 			<Stack.Screen
