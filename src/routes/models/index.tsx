@@ -6,6 +6,7 @@ export type PropsNavigationStack = {
 	Home: undefined;
 	Profile: undefined;
 	tab: undefined;
+	ProfileDetailing: undefined;
 }
 
 export type PropsStack = NativeStackNavigationProp<PropsNavigationStack>
