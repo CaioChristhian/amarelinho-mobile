@@ -6,12 +6,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from '../screens/Login';
 import { SingUp } from '../screens/SingUp';
 import { ProfileDetailing } from '../screens/ProfileDetailing';
+import { ProfessionalAssessment } from '../screens/ProfessionalAssessment';
 import { Text } from '../components/Text';
 import { PropsNavigationStack } from './models';
 import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
 import { LogoIcon } from '../components/Icons/LogoIcon';
 import { ProfileIcon } from '../components/Icons/ProfileIcon';
+
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
 const Stack = createNativeStackNavigator();
@@ -95,7 +97,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='ProfileDetailing'
+			initialRouteName='ProfessinalAssessment'
 		>
 			<Stack.Screen
 				name='tab'
@@ -115,10 +117,15 @@ export const AppRoutes = () => {
 				name='Profile'
 				component={Profile}
 			/>
-			
+
 			<Stack.Screen
 				name='ProfileDetailing'
 				component={ProfileDetailing}
+			/>
+
+			<Stack.Screen
+				name='ProfessinalAssessment'
+				component={ProfessionalAssessment}
 			/>
 		</Stack.Navigator>
 	);
