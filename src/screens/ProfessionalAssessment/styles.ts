@@ -22,7 +22,7 @@ export const StyledImage = styled(Image)`
 
 export const StyledTextInput = styled(TextInput)`
   height: 40%;
-  width: 60%;
+  width: 80%;
   border: 1px solid #000;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -35,7 +35,30 @@ export const RatingContainer = styled.View`
 `;
 
 export const RatingButton = styled.TouchableOpacity`
-  background-color: gray;
   padding: 10px;
   margin: 5px;
+`;
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+export const StyledButton = styled.TouchableOpacity`
+  background-color: blue;
+  padding: 10px;
+  margin: 5px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
+export const StyledButtonGreen = styled(StyledButton)`
+  background-color: green;
+`;
+
+export const ButtonText = styled.Text`
+  color: #fff;
+  font-size: 16px;
 `;
