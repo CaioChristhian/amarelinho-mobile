@@ -1,9 +1,9 @@
 import { SvgXml } from 'react-native-svg';
 
 interface Props {
-	color: string;
-	width: number;
-	height: number;
+	color?: string;
+	width?: number;
+	height?: number;
 }
 
 export function HeartIcon({ color, width = 24, height = 24}: Props) {

@@ -6,12 +6,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from '../screens/Login';
 import { SingUp } from '../screens/SingUp';
 import { ProfileDetailing } from '../screens/ProfileDetailing';
+import { ProfessionalAssessment } from '../screens/ProfessionalAssessment';
 import { Text } from '../components/Text';
 import { PropsNavigationStack } from './models';
 import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
+import { Chat } from '../screens/Chat';
 import { LogoIcon } from '../components/Icons/LogoIcon';
 import { ProfileIcon } from '../components/Icons/ProfileIcon';
+import { Settings } from '../screens/Settings';
+import { SettingsIcon } from '../components/Icons/SettingsIcon';
+
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
 const Stack = createNativeStackNavigator();
@@ -84,6 +89,22 @@ function AppTabRoutes() {
 					),
 				}}
 			/>
+
+<Screen
+				name='Settings'
+				component={Settings}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<SettingsIcon
+							color={color} width={24} height={24}
+						/>
+					),
+
+					tabBarLabel: ({ focused, color }) => (
+						<CustomTabBarLabel color={color} label='Settings' focused={focused} />
+					),
+				}}
+			/>
 		</Navigator>
 	);
 }
@@ -95,7 +116,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='ProfileDetailing'
+			initialRouteName='Home'
 		>
 			<Stack.Screen
 				name='tab'
@@ -115,10 +136,20 @@ export const AppRoutes = () => {
 				name='Profile'
 				component={Profile}
 			/>
-			
+
 			<Stack.Screen
 				name='ProfileDetailing'
 				component={ProfileDetailing}
+			/>
+
+			<Stack.Screen
+				name='ProfessinalAssessment'
+				component={ProfessionalAssessment}
+			/>
+
+			<Stack.Screen
+				name='Chat'
+				component={Chat}
 			/>
 		</Stack.Navigator>
 	);

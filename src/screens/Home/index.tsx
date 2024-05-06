@@ -1,6 +1,7 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
-
+import { FlatList, View,TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { PropsStack } from '../../routes/models';
 import { Text } from '../../components/Text';
 import { LupaIcon } from '../../components/Icons/LupaIcon';
 
@@ -13,6 +14,12 @@ import { StarIcon } from '../../components/Icons/StarIcon';
 import { HeartIcon } from '../../components/Icons/HeartIcon';
 
 export function Home(){
+
+	const navigation = useNavigation<PropsStack>(); 
+
+	const handleChatRedirect = () => {
+		navigation.navigate('Chat');
+	  };
 	return (
 		<S.Container>
 			<S.Header>
@@ -60,25 +67,27 @@ export function Home(){
 				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
 
 				<S.ProfessionalList>
-					<S.ProfessionalCard>
+				<TouchableOpacity onPress={handleChatRedirect}>
+					<View>
+						<S.ProfessionalCard>
 						<S.ProfessionalImageCard source={professional} />
-
 						<S.ProfessionalInfo>
 							<Text size={20} weight='600'>Dulce Vasconcelos</Text>
 							<Text size={18}>Jardineira</Text>
 							<S.RatingContainer>
-								<StarIcon  />
-								<StarIcon  />
-								<StarIcon  />
-								<StarIcon  />
-								<StarIcon  />
+							<StarIcon />
+							<StarIcon />
+							<StarIcon />
+							<StarIcon />
+							<StarIcon />
 							</S.RatingContainer>
 						</S.ProfessionalInfo>
-
 						<HeartIcon />
-
 						<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
-					</S.ProfessionalCard>
+						</S.ProfessionalCard>
+					</View>
+					</TouchableOpacity>
+					
 				</S.ProfessionalList>
 			</S.RecomendationContainer>
 		</S.Container>

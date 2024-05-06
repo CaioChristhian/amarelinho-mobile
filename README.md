@@ -31,7 +31,7 @@ expo start <br>
 Isso abrirá o Metro Bundler no seu navegador. Você poderá executar o aplicativo em um dispositivo físico usando o QR Code exibido, ou em um emulador.
 
 #### Com o React Native CLI
-Para executar o projeto no Android: <br>
+Para executar o projeto no Android:<br>
 react-native run-android
 
 #### Para executar o projeto no iOS (somente para macOS):
