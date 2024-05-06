@@ -11,6 +11,7 @@ import { Text } from '../components/Text';
 import { PropsNavigationStack } from './models';
 import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
+import { Chat } from '../screens/Chat';
 import { LogoIcon } from '../components/Icons/LogoIcon';
 import { ProfileIcon } from '../components/Icons/ProfileIcon';
 import { Settings } from '../screens/Settings';
@@ -144,6 +145,11 @@ export const AppRoutes = () => {
 			<Stack.Screen
 				name='ProfessinalAssessment'
 				component={ProfessionalAssessment}
+			/>
+
+			<Stack.Screen
+				name='Chat'
+				component={Chat}
 			/>
 		</Stack.Navigator>
 	);
