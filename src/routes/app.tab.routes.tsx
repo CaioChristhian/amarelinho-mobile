@@ -13,6 +13,8 @@ import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
 import { LogoIcon } from '../components/Icons/LogoIcon';
 import { ProfileIcon } from '../components/Icons/ProfileIcon';
+import { Settings } from '../screens/Settings';
+import { SettingsIcon } from '../components/Icons/SettingsIcon';
 
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
@@ -86,6 +88,22 @@ function AppTabRoutes() {
 					),
 				}}
 			/>
+
+<Screen
+				name='Settings'
+				component={Settings}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<SettingsIcon
+							color={color} width={24} height={24}
+						/>
+					),
+
+					tabBarLabel: ({ focused, color }) => (
+						<CustomTabBarLabel color={color} label='Settings' focused={focused} />
+					),
+				}}
+			/>
 		</Navigator>
 	);
 }
@@ -97,7 +115,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='ProfessinalAssessment'
+			initialRouteName='Home'
 		>
 			<Stack.Screen
 				name='tab'
