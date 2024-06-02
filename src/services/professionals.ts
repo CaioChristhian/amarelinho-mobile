@@ -8,7 +8,7 @@ interface Professional {
 }
 
 export const getProfessionals = async (): Promise<Professional[]> => {
-  const response = await api.get<Professional[]>('/professional/');
+  const response = await api.get<Professional[]>('/professional');
   return response.data;
 };
 
