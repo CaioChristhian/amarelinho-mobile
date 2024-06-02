@@ -5,9 +5,9 @@ import { AppRoutes } from './app.tab.routes';
 import PushNotificationService from './PushNotificationService';
 
 export function Routes(){
-  useEffect(() => {
+/*   useEffect(() => {
     PushNotificationService.configure();
-  }, []);
+  }, []); */
 
   return (
     <NavigationContainer>
