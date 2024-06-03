@@ -1,9 +1,10 @@
 import React from 'react';
-import { FlatList, View,TouchableOpacity} from 'react-native';
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { PropsStack } from '../../routes/models';
 import { Text } from '../../components/Text';
 import { LupaIcon } from '../../components/Icons/LupaIcon';
+import Carousel from 'react-native-snap-carousel';
 
 import profile from '../../assets/Images/ProfileImage.png';
 import banner from '../../assets/Images/banner.png'
@@ -13,83 +14,103 @@ import * as S from './styles';
 import { StarIcon } from '../../components/Icons/StarIcon';
 import { HeartIcon } from '../../components/Icons/HeartIcon';
 
-export function Home(){
+const professionalsData = [
+    {
+        id: 1,
+        userId: 1,
+        phoneNumber: 12331233,
+        description: "bom, bonito e gostoso",
+        created_at: "2024-04-19T01:32:12.304Z",
+        updated_at: "2024-04-19T01:32:12.304Z"
+    },
+    // Adicione mais profissionais conforme necessário
+];
 
-	const navigation = useNavigation<PropsStack>(); 
+export function Home() {
 
-	const handleChatRedirect = () => {
-		navigation.navigate('Chat');
-	  };
-	return (
-		<S.Container>
-			<S.Header>
-				<S.HeaderTextContainer>
-					<Text weight='600'>Bem vindo !</Text>
-					<Text weight='600'>José Pinto Valente</Text>
-				</S.HeaderTextContainer>
-				<S.ImageProfile source={profile} />
-			</S.Header>
+    const navigation = useNavigation<PropsStack>(); 
 
-			<S.Hottest>
-				<Text weight='700'>Destaques</Text>
-				<S.HottestBanners borderRadius={12} source={banner}>
-					<S.ProfessionalDetails>
-						<S.ProfessionalImage source={professional} />
-						<S.ProfessionalDescription>
-								<Text weight='600' color='#FFF'>Roberto Miranda</Text>
-								<Text weight='600' color='#FFF'>Pedreiro</Text>
-						</S.ProfessionalDescription>
-					</S.ProfessionalDetails>
+    const handleChatRedirect = () => {
+        navigation.navigate('Chat');
+    };
 
-					<Text style={{ alignSelf: 'center', marginBottom: 12 }} weight='600' color='#FFF'>Faixa: 300 - 1200 / Diária</Text>
-					<View style={{ paddingHorizontal: 62 }}>
-						<S.Button>
-							<Text style={{ alignSelf: 'center' }} weight='600' color='#FFF'>Solicitar</Text>
-						</S.Button>
-					</View>
-				</S.HottestBanners>
-			</S.Hottest>
+    const renderCarouselItem = ({ item }) => (
+        <S.HottestBanners borderRadius={12} source={banner}>
+            <S.ProfessionalDetails>
+                <S.ProfessionalImage source={professional} />
+                <S.ProfessionalDescription>
+                    <Text weight='600' color='#FFF'>Roberto Miranda</Text>
+                    <Text weight='600' color='#FFF'>Pedreiro</Text>
+                </S.ProfessionalDescription>
+            </S.ProfessionalDetails>
+            <Text style={{ alignSelf: 'center', marginBottom: 12 }} weight='600' color='#FFF'>Faixa: 300 - 1200 / Diária</Text>
+            <View style={{ paddingHorizontal: 62 }}>
+                <S.Button>
+                    <Text style={{ alignSelf: 'center' }} weight='600' color='#FFF'>Solicitar</Text>
+                </S.Button>
+            </View>
+        </S.HottestBanners>
+    );
 
-			<Text style={{ alignSelf: 'center', marginTop: 36 }} weight='700' size={24}>Em busca de profissional?</Text>
+    return (
+        <S.Container>
+            <S.Header>
+                <S.HeaderTextContainer>
+                    <Text weight='600'>Bem vindo !</Text>
+                    <Text weight='600'>José Pinto Valente</Text>
+                </S.HeaderTextContainer>
+                <S.ImageProfile source={profile} />
+            </S.Header>
 
-			<S.InputContainer>
-				<LupaIcon />
-				<S.Input
-					placeholder={`Encontre pela especialidade desejada`}
-				/>
-			</S.InputContainer>
+            <S.Hottest>
+                <Text weight='700'>Destaques</Text>
+                <Carousel
+                    data={professionalsData}
+                    renderItem={renderCarouselItem}
+                    sliderWidth={400}
+                    itemWidth={300}
+                />
+            </S.Hottest>
 
-			<S.PersonalService>
-				<Text size={18} weight='600'>Criar demanda personalisada</Text>
-			</S.PersonalService>
+            <Text style={{ alignSelf: 'center', marginTop: 36 }} weight='700' size={24}>Em busca de profissional?</Text>
 
-			<S.RecomendationContainer>
-				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
+            <S.InputContainer>
+                <LupaIcon />
+                <S.Input
+                    placeholder={`Encontre pela especialidade desejada`}
+                />
+            </S.InputContainer>
 
-				<S.ProfessionalList>
-				<TouchableOpacity onPress={handleChatRedirect}>
-					<View>
-						<S.ProfessionalCard>
-						<S.ProfessionalImageCard source={professional} />
-						<S.ProfessionalInfo>
-							<Text size={20} weight='600'>Dulce Vasconcelos</Text>
-							<Text size={18}>Jardineira</Text>
-							<S.RatingContainer>
-							<StarIcon />
-							<StarIcon />
-							<StarIcon />
-							<StarIcon />
-							<StarIcon />
-							</S.RatingContainer>
-						</S.ProfessionalInfo>
-						<HeartIcon />
-						<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
-						</S.ProfessionalCard>
-					</View>
-					</TouchableOpacity>
-					
-				</S.ProfessionalList>
-			</S.RecomendationContainer>
-		</S.Container>
-	);
+            <S.PersonalService>
+                <Text size={18} weight='600'>Criar demanda personalisada</Text>
+            </S.PersonalService>
+
+            <S.RecomendationContainer>
+                <Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
+
+                <S.ProfessionalList>
+                    <TouchableOpacity onPress={handleChatRedirect}>
+                        <View>
+                            <S.ProfessionalCard>
+                                <S.ProfessionalImageCard source={professional} />
+                                <S.ProfessionalInfo>
+                                    <Text size={20} weight='600'>Dulce Vasconcelos</Text>
+                                    <Text size={18}>Jardineira</Text>
+                                    <S.RatingContainer>
+                                        <StarIcon />
+                                        <StarIcon />
+                                        <StarIcon />
+                                        <StarIcon />
+                                        <StarIcon />
+                                    </S.RatingContainer>
+                                </S.ProfessionalInfo>
+                                <HeartIcon />
+                                <Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
+                            </S.ProfessionalCard>
+                        </View>
+                    </TouchableOpacity>
+                </S.ProfessionalList>
+            </S.RecomendationContainer>
+        </S.Container>
+    );
 }
