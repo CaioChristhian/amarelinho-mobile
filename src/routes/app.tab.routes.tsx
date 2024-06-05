@@ -12,8 +12,10 @@ import { PropsNavigationStack } from './models';
 import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
 import { Chat } from '../screens/Chat';
+import { Search } from '../screens/Search';
 import { LogoIcon } from '../components/Icons/LogoIcon';
 import { ProfileIcon } from '../components/Icons/ProfileIcon';
+import { LupaIcon } from '../components/Icons/LupaIcon';
 import { Settings } from '../screens/Settings';
 import { SettingsIcon } from '../components/Icons/SettingsIcon';
 
@@ -75,6 +77,22 @@ function AppTabRoutes() {
 			/>
 
 			<Screen
+				name='Search'
+				component={Search}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<LupaIcon
+							color={color}
+						/>
+					),
+
+					tabBarLabel: ({ focused, color }) => (
+						<CustomTabBarLabel color={color} label='Search' focused={focused} />
+					),
+				}}
+			/>
+
+			<Screen
 				name='Profile'
 				component={Profile}
 				options={{
@@ -90,7 +108,7 @@ function AppTabRoutes() {
 				}}
 			/>
 
-<Screen
+<			Screen
 				name='Settings'
 				component={Settings}
 				options={{
@@ -135,6 +153,11 @@ export const AppRoutes = () => {
 			<Stack.Screen
 				name='Profile'
 				component={Profile}
+			/>
+
+			<Stack.Screen
+				name='Search'
+				component={Search}
 			/>
 
 			<Stack.Screen

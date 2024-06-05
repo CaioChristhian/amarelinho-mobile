@@ -71,19 +71,6 @@ export function Home(){
 				</S.HottestBanners>
 			</S.Hottest>
 
-			<Text style={{ alignSelf: 'center', marginTop: 36 }} weight='700' size={24}>Em busca de profissional?</Text>
-
-			<S.InputContainer>
-				<LupaIcon />
-				<S.Input
-					placeholder={`Encontre pela especialidade desejada`}
-				/>
-			</S.InputContainer>
-
-			<S.PersonalService>
-				<Text size={18} weight='600'>Criar demanda personalisada</Text>
-			</S.PersonalService>
-
 			<S.RecomendationContainer>
 				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
 
