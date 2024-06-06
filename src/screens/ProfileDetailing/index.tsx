@@ -1,10 +1,14 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { PropsStack } from '../../routes/models';
 import { StarIcon } from '../../components/Icons/StarIcon';
 import profile from '../../assets/Images/ProfileImage.png';
 import * as S from './styles';
 
 export function ProfileDetailing() {
+    const navigation = useNavigation<PropsStack>();
+
     const user = {
         name: 'Marcos Silva',
         phone: '123-456-7890',
@@ -18,6 +22,10 @@ export function ProfileDetailing() {
         ],
         rating: 4.5,
     };
+
+    const handleChatRedirect = () => {
+		navigation.navigate('Chat');
+	};
 
     return (
         <S.Container>
@@ -57,7 +65,7 @@ export function ProfileDetailing() {
                 <S.ServiceButton onPress={() => {/* código para solicitar serviço */ }}>
                     <S.ButtonText>Solicitar Serviço</S.ButtonText>
                 </S.ServiceButton>
-                <S.ChatButton onPress={() => {/* código para abrir chat */ }}>
+                <S.ChatButton onPress={handleChatRedirect}>
                     <S.ButtonText>Chat</S.ButtonText>
                 </S.ChatButton>
             </S.ButtonContainer>
