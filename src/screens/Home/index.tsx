@@ -3,7 +3,6 @@ import { FlatList, View,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { PropsStack } from '../../routes/models';
 import { Text } from '../../components/Text';
-import { LupaIcon } from '../../components/Icons/LupaIcon';
 
 import profile from '../../assets/Images/ProfileImage.png';
 import banner from '../../assets/Images/banner.png'
@@ -27,8 +26,8 @@ export function Home(){
 	const navigation = useNavigation<PropsStack>();
 	const [categories, setCategories] = useState<ICategory[]>([]);
 
-	const handleChatRedirect = () => {
-		navigation.navigate('Chat');
+	const handleProfileRedirect = () => {
+		navigation.navigate('ProfileDetailing');
 	};
 
 
@@ -75,7 +74,7 @@ export function Home(){
 				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
 
 				<S.ProfessionalList>
-					<TouchableOpacity onPress={handleChatRedirect}>
+					<TouchableOpacity onPress={handleProfileRedirect}>
 						<View>
 							<S.ProfessionalCard>
 							<S.ProfessionalImageCard source={professional} />
