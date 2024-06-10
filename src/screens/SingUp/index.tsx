@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
 import Svg, { Path } from 'react-native-svg';
+import { useAuth } from '../../context/AuthContext';
 
 import * as S from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { PropsStack } from '../../routes/models';
 
 export function SingUp() {
-  const [nome, setNome] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [senha, setSenha] = useState<string>('');
+	const navigation = useNavigation<PropsStack>();
+	const { signUp } = useAuth()!;
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+	const handleSignUp = async () => {
+    try {
+      await signUp(name, email, password);
+      navigation.navigate('Home');
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
+  };
+
   return (
     <S.Container>
 
       <S.StyledInput
         placeholder="Nome"
-        value={nome}
-        onChangeText={text => setNome(text)}
+        value={name}
+        onChangeText={text => setName(text)}
       />
       <S.StyledInput
         placeholder="Email"
@@ -23,10 +38,10 @@ export function SingUp() {
       <S.StyledInput
         placeholder="Senha"
         secureTextEntry={true}
-        value={senha}
-        onChangeText={text => setSenha(text)}
+        value={password}
+        onChangeText={text => setPassword(text)}
       />
-      <S.StyledButton>
+      <S.StyledButton onPress={handleSignUp}>
         <S.ButtonText>Registrar</S.ButtonText>
       </S.StyledButton>
 

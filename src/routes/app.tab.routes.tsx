@@ -18,6 +18,7 @@ import { ProfileIcon } from '../components/Icons/ProfileIcon';
 import { LupaIcon } from '../components/Icons/LupaIcon';
 import { Settings } from '../screens/Settings';
 import { SettingsIcon } from '../components/Icons/SettingsIcon';
+import { useAuth } from '../context/AuthContext';
 
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
@@ -128,28 +129,22 @@ function AppTabRoutes() {
 }
 
 export const AppRoutes = () => {
+	const { user } = useAuth()!;
 
 	return (
 		<Stack.Navigator
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='Home'
+			initialRouteName='SingUp'
 		>
-			<Stack.Screen
+			{user ? (
+				<>
+					<Stack.Screen
 				name='tab'
 				component={AppTabRoutes}
 			/>
 
-			<Stack.Screen
-				name='Login'
-				component={Login}
-			/>
-
-			<Stack.Screen
-				name='SingUp'
-				component={SingUp}
-			/>
 			<Stack.Screen
 				name='Profile'
 				component={Profile}
@@ -174,6 +169,20 @@ export const AppRoutes = () => {
 				name='Chat'
 				component={Chat}
 			/>
+				</>
+			): (
+				<>
+				<Stack.Screen
+				name='Login'
+				component={Login}
+			/>
+
+			<Stack.Screen
+				name='SingUp'
+				component={SingUp}
+			/>
+				</>
+			)}
 		</Stack.Navigator>
 	);
 };

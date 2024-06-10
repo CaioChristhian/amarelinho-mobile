@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../context/AuthContext';
 import styles from './styles';
+import { PropsStack } from '../../routes/models';
 
 export function Login() {
   const logo = require('../../assets/Images/logo.png')
-  const navigation = useNavigation();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const handleLogin = () => {
-		// Lógica de autenticação
-		console.log('Email:', email);
-		console.log('Senha:', password);}
-  return (
+	const navigation = useNavigation<PropsStack>();
+	const { login } = useAuth()!;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+	const handleLogin = async () => {
+    try {
+      await login(email, password);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
+
+	return (
 	  <View style={styles.container}>
       <Image
       source={logo} style={styles.logo}/>

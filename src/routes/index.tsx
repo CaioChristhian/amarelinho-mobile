@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { AppRoutes } from './app.tab.routes';
+import { AuthProvider } from '../context/AuthContext';
 import PushNotificationService from './PushNotificationService';
 
 export function Routes(){
@@ -10,8 +11,10 @@ export function Routes(){
   }, []); */
 
   return (
-    <NavigationContainer>
-      <AppRoutes />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
