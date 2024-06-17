@@ -109,7 +109,7 @@ function AppTabRoutes() {
 				}}
 			/>
 
-<			Screen
+{/* <Screen
 				name='Settings'
 				component={Settings}
 				options={{
@@ -123,7 +123,7 @@ function AppTabRoutes() {
 						<CustomTabBarLabel color={color} label='Settings' focused={focused} />
 					),
 				}}
-			/>
+			/> */}
 		</Navigator>
 	);
 }
