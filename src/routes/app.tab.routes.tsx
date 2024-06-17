@@ -136,7 +136,7 @@ export const AppRoutes = () => {
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='SingUp'
+			initialRouteName='Login'
 		>
 			{user ? (
 				<>

@@ -9,6 +9,7 @@ export type PropsNavigationStack = {
 	ProfileDetailing: undefined;
 	Settings: undefined;
 	Chat: undefined;
+	Search: undefined;
 }
 
 export type PropsStack = NativeStackNavigationProp<PropsNavigationStack>
