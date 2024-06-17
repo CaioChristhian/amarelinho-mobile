@@ -10,12 +10,13 @@ const styles = StyleSheet.create({
   logo: {
     width: 200,
     height: 200,
+		marginBottom: 24,
   },
   title: {
     fontSize: 42,
     marginBottom: 10,
-    fontStyle: 'italic', 
-    fontWeight: '600', 
+    fontStyle: 'italic',
+    fontWeight: '600',
   },
   input: {
     width: '80%',
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     marginBottom: 10,
+		marginTop: 10
   },
   buttonText: {
     color: 'white',

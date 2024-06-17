@@ -30,21 +30,10 @@ export const ButtonText = styled.Text`
   color: #FFFFFF;
 `;
 
-export const GoogleButton = styled(TouchableOpacity)` 
-  background-color: #E0F0FA;
-  border-radius: 15px;
-  width: 100%;
-  padding: 10px;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 50px;
-`;
-
-export const GoogleButtonText = styled(Text)`
-  color: #0273BB;
-  text-align: center;
-  flex: 1;
+export const ImageLogo = styled.Image`
+	width: 200;
+	height: 200;
+	margin-bottom: 24px;
 `;
 
 export const BackButton = styled(TouchableOpacity)`

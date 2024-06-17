@@ -13,21 +13,7 @@ export function Settings(){
         <S.Container>
             <Text style={{ padding: 24 }} weight='600' size={24}>Configurações</Text>
 
-            <S.CardConfig borderBottom>
-                <S.CardContent>
-                    <SunIcon />
-                    <Text size={16}>Tema </Text>
-                </S.CardContent>
-                <ArrowRightIcon color='#000000' />
-            </S.CardConfig>
 
-            <S.CardConfig borderBottom>
-                <S.CardContent>
-                    <LanguageIcon />
-                    <Text size={16}>Idioma </Text>
-                </S.CardContent>
-                <ArrowRightIcon color='#000000' />
-            </S.CardConfig>
 
             <S.CardConfig>
                 <S.CardContent>

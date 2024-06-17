@@ -12,10 +12,13 @@ import { PropsNavigationStack } from './models';
 import { Profile } from '../screens/Profile';
 import { Home } from '../screens/Home';
 import { Chat } from '../screens/Chat';
+import { Search } from '../screens/Search';
 import { LogoIcon } from '../components/Icons/LogoIcon';
 import { ProfileIcon } from '../components/Icons/ProfileIcon';
+import { LupaIcon } from '../components/Icons/LupaIcon';
 import { Settings } from '../screens/Settings';
 import { SettingsIcon } from '../components/Icons/SettingsIcon';
+import { useAuth } from '../context/AuthContext';
 
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
@@ -75,6 +78,22 @@ function AppTabRoutes() {
 			/>
 
 			<Screen
+				name='Search'
+				component={Search}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<LupaIcon
+							color={color}
+						/>
+					),
+
+					tabBarLabel: ({ focused, color }) => (
+						<CustomTabBarLabel color={color} label='Search' focused={focused} />
+					),
+				}}
+			/>
+
+			<Screen
 				name='Profile'
 				component={Profile}
 				options={{
@@ -90,7 +109,7 @@ function AppTabRoutes() {
 				}}
 			/>
 
-<Screen
+{/* <Screen
 				name='Settings'
 				component={Settings}
 				options={{
@@ -104,37 +123,36 @@ function AppTabRoutes() {
 						<CustomTabBarLabel color={color} label='Settings' focused={focused} />
 					),
 				}}
-			/>
+			/> */}
 		</Navigator>
 	);
 }
 
 export const AppRoutes = () => {
+	const { user } = useAuth()!;
 
 	return (
 		<Stack.Navigator
 			screenOptions={{
 				headerShown: false
 			}}
-			initialRouteName='Home'
+			initialRouteName='Login'
 		>
-			<Stack.Screen
+			{user ? (
+				<>
+					<Stack.Screen
 				name='tab'
 				component={AppTabRoutes}
 			/>
 
 			<Stack.Screen
-				name='Login'
-				component={Login}
+				name='Profile'
+				component={Profile}
 			/>
 
 			<Stack.Screen
-				name='SingUp'
-				component={SingUp}
-			/>
-			<Stack.Screen
-				name='Profile'
-				component={Profile}
+				name='Search'
+				component={Search}
 			/>
 
 			<Stack.Screen
@@ -151,6 +169,20 @@ export const AppRoutes = () => {
 				name='Chat'
 				component={Chat}
 			/>
+				</>
+			): (
+				<>
+				<Stack.Screen
+				name='Login'
+				component={Login}
+			/>
+
+			<Stack.Screen
+				name='SingUp'
+				component={SingUp}
+			/>
+				</>
+			)}
 		</Stack.Navigator>
 	);
 };
