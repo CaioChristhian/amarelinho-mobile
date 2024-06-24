@@ -4,7 +4,7 @@ import styles from './styles';
 import { useAuth } from '../../context/AuthContext';
 
 export function Profile() {
-  const { logout } = useAuth()!; // Usando o hook para acessar a função de logout
+  const { user,logout } = useAuth()!; // Usando o hook para acessar a função de logout
 
 
   const userName = 'João Silva';
@@ -17,7 +17,7 @@ export function Profile() {
       <Text style={styles.headerText}>Perfil de Usuário</Text>
       <View style={styles.userInfoContainer}>
         <View>
-          <Text style={styles.userName}>{userName}</Text>
+          <Text style={styles.userName}>{user?.name}</Text>
           <Text style={styles.userOccupation}>{userOccupation}</Text>
           <View style={styles.ratingContainer}>
             <Text style={styles.ratingText}>{userRating.toFixed(1)}</Text>

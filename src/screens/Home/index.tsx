@@ -7,6 +7,9 @@ import { Text } from '../../components/Text';
 import profile from '../../assets/Images/ProfileImage.png';
 import banner from '../../assets/Images/banner.png'
 import professional from '../../assets/Images/people-banner.png'
+import jurica from '../../assets/Images/jurica.png'
+import ian from '../../assets/Images/ian.png'
+import toa from '../../assets/Images/toa.png'
 
 import * as S from './styles';
 import { StarIcon } from '../../components/Icons/StarIcon';
@@ -78,6 +81,57 @@ export function Home(){
 						<View>
 							<S.ProfessionalCard>
 							<S.ProfessionalImageCard source={professional} />
+							<S.ProfessionalInfo>
+								<Text size={20} weight='600'>Dulce Vasconcelos</Text>
+								<Text size={18}>Jardineira</Text>
+								<S.RatingContainer>
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								</S.RatingContainer>
+							</S.ProfessionalInfo>
+							<HeartIcon />
+							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
+							</S.ProfessionalCard>
+
+							<S.ProfessionalCard>
+							<S.ProfessionalImageCard source={ian} />
+							<S.ProfessionalInfo>
+								<Text size={20} weight='600'>Ian-Somel Gustavo</Text>
+								<Text size={18}>Pintor</Text>
+								<S.RatingContainer>
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								</S.RatingContainer>
+							</S.ProfessionalInfo>
+							<HeartIcon />
+							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>3.5|750 avaliações</Text>
+							</S.ProfessionalCard>
+
+							<S.ProfessionalCard>
+							<S.ProfessionalImageCard source={jurica} />
+							<S.ProfessionalInfo>
+								<Text size={20} weight='600'>Jurica Alencar</Text>
+								<Text size={18}>Designer</Text>
+								<S.RatingContainer>
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								<StarIcon />
+								</S.RatingContainer>
+							</S.ProfessionalInfo>
+							<HeartIcon />
+							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.5|800 avaliações</Text>
+							</S.ProfessionalCard>
+
+							<S.ProfessionalCard>
+							<S.ProfessionalImageCard source={jurica} />
 							<S.ProfessionalInfo>
 								<Text size={20} weight='600'>Dulce Vasconcelos</Text>
 								<Text size={18}>Jardineira</Text>
