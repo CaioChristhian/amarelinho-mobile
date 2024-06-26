@@ -23,7 +23,7 @@ export function SingUp() {
 		}
 		try {
 			await signUp(name, email, password);
-			navigation.navigate('Home');
+			navigation.navigate('CreateProfessional');
 		} catch (error) {
 			console.error('Signup failed:', error);
 		}
@@ -32,10 +32,6 @@ export function SingUp() {
 	function handleBackLogin() {
 		navigation.navigate('Login')
 	}
-
-	useEffect(() => {
-		console.log(name)
-	}, [name])
 
   return (
     <S.Container>

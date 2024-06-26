@@ -3,7 +3,6 @@ import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { PropsStack } from '../../routes/models';
 import { StarIcon } from '../../components/Icons/StarIcon';
-import profile from '../../assets/Images/ProfileImage.png';
 import * as S from './styles';
 
 export function ProfileDetailing() {
@@ -31,7 +30,7 @@ export function ProfileDetailing() {
         <S.Container>
             <S.TitleText>Perfil do Usuário</S.TitleText>
             <S.ProfileView>
-                <S.ProfileImage source={profile} />
+                <S.ProfileImage source={{uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
                 <S.InfoView>
                     <S.NameText>{user.name}</S.NameText>
                     <S.OccupationText>{user.occupation}</S.OccupationText>
