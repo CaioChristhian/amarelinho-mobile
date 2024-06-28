@@ -19,6 +19,7 @@ import { LupaIcon } from '../components/Icons/LupaIcon';
 import { Settings } from '../screens/Settings';
 import { SettingsIcon } from '../components/Icons/SettingsIcon';
 import { useAuth } from '../context/AuthContext';
+import { CreateProfessional } from '../screens/CreateProfessional/CreateProfessional';
 
 
 const { Navigator, Screen } = createBottomTabNavigator<PropsNavigationStack>();
@@ -141,46 +142,51 @@ export const AppRoutes = () => {
 			{user ? (
 				<>
 					<Stack.Screen
-				name='tab'
-				component={AppTabRoutes}
-			/>
+					name='tab'
+					component={AppTabRoutes}
+					/>
 
-			<Stack.Screen
-				name='Profile'
-				component={Profile}
-			/>
+					<Stack.Screen
+						name='Profile'
+						component={Profile}
+					/>
 
-			<Stack.Screen
-				name='Search'
-				component={Search}
-			/>
+					<Stack.Screen
+						name='Search'
+						component={Search}
+					/>
 
-			<Stack.Screen
-				name='ProfileDetailing'
-				component={ProfileDetailing}
-			/>
+					<Stack.Screen
+						name='ProfileDetailing'
+						component={ProfileDetailing}
+					/>
 
-			<Stack.Screen
-				name='ProfessinalAssessment'
-				component={ProfessionalAssessment}
-			/>
+					<Stack.Screen
+						name='ProfessinalAssessment'
+						component={ProfessionalAssessment}
+					/>
 
-			<Stack.Screen
-				name='Chat'
-				component={Chat}
-			/>
+					<Stack.Screen
+						name='Chat'
+						component={Chat}
+					/>
+
+					<Stack.Screen
+						name='CreateProfessional'
+						component={CreateProfessional}
+					/>
 				</>
 			): (
 				<>
-				<Stack.Screen
-				name='Login'
-				component={Login}
-			/>
+					<Stack.Screen
+						name='Login'
+						component={Login}
+					/>
 
-			<Stack.Screen
-				name='SingUp'
-				component={SingUp}
-			/>
+					<Stack.Screen
+						name='SingUp'
+						component={SingUp}
+					/>
 				</>
 			)}
 		</Stack.Navigator>

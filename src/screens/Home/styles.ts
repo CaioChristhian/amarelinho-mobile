@@ -25,7 +25,6 @@ export const ImageProfile = styled.Image`
 	width: 72px;
 	height: 72px;
 	border-radius: ${72/2}px;
-	border: 2px solid black;
 `;
 
 export const Hottest = styled.View`

@@ -1,13 +1,9 @@
 import { SvgXml } from 'react-native-svg';
+import { IconProps } from '../../types';
 
-interface Props {
-	color?: string;
-	width?: number;
-	height?: number;
-}
 
-export function LupaIcon({ color, width = 24, height = 24}: Props) {
-	const markup = `<svg width=${width} height=${height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+export function LupaIcon({ color = '#000000', size = 24}: IconProps) {
+	const markup = `<svg width=${size} height=${size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M9.70853 19.4171C11.8042 19.4171 13.7611 18.7354 15.3519 17.5991L21.336 23.5833C21.6138 23.8611 21.9799 24 22.3587 24C23.1793 24 23.7727 23.3687 23.7727 22.5607C23.7727 22.182 23.6465 21.8285 23.3686 21.5508L17.4223 15.5917C18.6722 13.9506 19.4171 11.9179 19.4171 9.70858C19.4171 4.36823 15.0488 0 9.70853 0C4.35557 0 0 4.36823 0 9.70858C0 15.0489 4.35557 19.4171 9.70853 19.4171ZM9.70853 17.3214C5.52969 17.3214 2.09572 13.8748 2.09572 9.70858C2.09572 5.54235 5.52969 2.09577 9.70853 2.09577C13.8748 2.09577 17.3213 5.54235 17.3213 9.70858C17.3213 13.8748 13.8748 17.3214 9.70853 17.3214Z" fill="#433D3D"/>
 		</svg>
  `;

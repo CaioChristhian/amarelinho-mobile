@@ -4,17 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import { PropsStack } from '../../routes/models';
 import { Text } from '../../components/Text';
 
-import profile from '../../assets/Images/ProfileImage.png';
-import banner from '../../assets/Images/banner.png'
-import professional from '../../assets/Images/people-banner.png'
-import jurica from '../../assets/Images/jurica.png'
-import ian from '../../assets/Images/ian.png'
-import toa from '../../assets/Images/toa.png'
-
 import * as S from './styles';
 import { StarIcon } from '../../components/Icons/StarIcon';
 import { HeartIcon } from '../../components/Icons/HeartIcon';
 import api from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 
 interface ICategory {
   id: number;
@@ -25,6 +19,7 @@ interface ICategory {
 }
 
 export function Home(){
+	const { user } = useAuth()!; // Usando o hook para acessar a função de logout
 
 	const navigation = useNavigation<PropsStack>();
 	const [categories, setCategories] = useState<ICategory[]>([]);
@@ -48,16 +43,16 @@ export function Home(){
 			<S.Header>
 				<S.HeaderTextContainer>
 					<Text weight='600'>Bem vindo !</Text>
-					<Text weight='600'>José Pinto Valente</Text>
+					<Text weight='600'>{user?.name}</Text>
 				</S.HeaderTextContainer>
-				<S.ImageProfile source={profile} />
+				<S.ImageProfile source={{uri: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'}} />
 			</S.Header>
 
 			<S.Hottest>
 				<Text weight='700'>Destaques</Text>
-				<S.HottestBanners borderRadius={12} source={banner}>
+				<S.HottestBanners borderRadius={12} source={{uri: 'https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?q=80&w=1979&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}}>
 					<S.ProfessionalDetails>
-						<S.ProfessionalImage source={professional} />
+						<S.ProfessionalImage source={{ uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} />
 						<S.ProfessionalDescription>
 								<Text weight='600' color='#FFF'>Roberto Miranda</Text>
 								<Text weight='600' color='#FFF'>Pedreiro</Text>
@@ -77,10 +72,11 @@ export function Home(){
 				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
 
 				<S.ProfessionalList>
-					<TouchableOpacity onPress={handleProfileRedirect}>
 						<View>
+						<TouchableOpacity onPress={handleProfileRedirect}>
+
 							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={professional} />
+							<S.ProfessionalImageCard source={{uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
 							<S.ProfessionalInfo>
 								<Text size={20} weight='600'>Dulce Vasconcelos</Text>
 								<Text size={18}>Jardineira</Text>
@@ -95,9 +91,12 @@ export function Home(){
 							<HeartIcon />
 							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
 							</S.ProfessionalCard>
+							</TouchableOpacity>
+
+							<TouchableOpacity onPress={handleProfileRedirect}>
 
 							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={ian} />
+							<S.ProfessionalImageCard source={{uri: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
 							<S.ProfessionalInfo>
 								<Text size={20} weight='600'>Ian-Somel Gustavo</Text>
 								<Text size={18}>Pintor</Text>
@@ -112,9 +111,12 @@ export function Home(){
 							<HeartIcon />
 							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>3.5|750 avaliações</Text>
 							</S.ProfessionalCard>
+							</TouchableOpacity>
+
+							<TouchableOpacity onPress={handleProfileRedirect}>
 
 							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={jurica} />
+							<S.ProfessionalImageCard source={{uri: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
 							<S.ProfessionalInfo>
 								<Text size={20} weight='600'>Jurica Alencar</Text>
 								<Text size={18}>Designer</Text>
@@ -129,25 +131,8 @@ export function Home(){
 							<HeartIcon />
 							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.5|800 avaliações</Text>
 							</S.ProfessionalCard>
-
-							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={jurica} />
-							<S.ProfessionalInfo>
-								<Text size={20} weight='600'>Dulce Vasconcelos</Text>
-								<Text size={18}>Jardineira</Text>
-								<S.RatingContainer>
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								</S.RatingContainer>
-							</S.ProfessionalInfo>
-							<HeartIcon />
-							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
-							</S.ProfessionalCard>
+							</TouchableOpacity>
 						</View>
-					</TouchableOpacity>
 				</S.ProfessionalList>
 			</S.RecomendationContainer>
 		</S.Container>

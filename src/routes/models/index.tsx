@@ -10,6 +10,7 @@ export type PropsNavigationStack = {
 	Settings: undefined;
 	Chat: undefined;
 	Search: undefined;
+	CreateProfessional: undefined;
 }
 
 export type PropsStack = NativeStackNavigationProp<PropsNavigationStack>

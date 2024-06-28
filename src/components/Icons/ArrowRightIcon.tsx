@@ -1,13 +1,8 @@
 import { SvgXml } from 'react-native-svg';
+import { IconProps } from '../../types';
 
-interface Props {
-	color?: string;
-	width?: number;
-	height?: number;
-}
-
-export function ArrowRightIcon({ color, width = 24, height = 24}: Props) {
-	const markup = `<svg width=${width} height=${height} fill=${color} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+export function ArrowRightIcon({ color = '#000000', size = 24}: IconProps) {
+	const markup = `<svg width=${size} height=${size} fill=${color} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 		viewBox="0 0 330 330" xml:space="preserve">
 		<path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001
 			c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213

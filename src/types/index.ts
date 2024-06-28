@@ -14,3 +14,8 @@ export interface AuthContextType {
   signUp: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
+
+export interface IconProps {
+  color?: string;
+  size?: number;
+}
