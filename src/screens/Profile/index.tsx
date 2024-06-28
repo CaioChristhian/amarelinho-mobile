@@ -7,7 +7,7 @@ import { CreateProfessionalModal } from '../../components/CreateProfessionalModa
 
 export function Profile() {
   const { user,logout } = useAuth()!; // Usando o hook para acessar a função de logout
-  const [modalVisible, setModalVisible] = useState(true); // Estado para controlar a visibilidade do modal
+  const [modalVisible, setModalVisible] = useState(false); // Estado para controlar a visibilidade do modal
 
 
   const userName = 'João Silva';
@@ -30,10 +30,12 @@ export function Profile() {
         </View>
         <Image source={{uri:'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'}} style={styles.avatar} />
       </View>
-      <Text style={styles.historyText}>Histórico</Text>
       <Button title="Logout" onPress={logout} color="#e85954" />
       <Button title="Abrir Modal" onPress={() => setModalVisible(true)} color="#4CAF50" />
-			</View>
+
+			<Text style={styles.historyText}>Histórico</Text>
+
+		</View>
 
       <CreateProfessionalModal  isVisible={modalVisible} onClose={() => setModalVisible(false)} />
 		</>
