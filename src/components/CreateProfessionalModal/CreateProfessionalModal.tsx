@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../Text';
 
 import * as S from './styles';
+import api from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 
 interface ModalProps {
 	isVisible: boolean;
@@ -14,10 +16,26 @@ export function CreateProfessionalModal({ isVisible, onClose}: ModalProps) {
 		const [phoneNumber, setPhoneNumber] = useState('');
 		const [description, setDescription] = useState('');
 
+		const {user} = useAuth()!;
+
 
 		function handleCreateProfessional() {
+			const professionalData = {
+					phoneNumber,
+					description,
+					userId: user?.id
+			};
 
-		}
+			api.post('/professional', professionalData)
+					.then(response => {
+							console.log('Professional created successfully:', response.data);
+							onClose(); // Close modal on success
+					})
+					.catch(error => {
+							console.error('Error creating professional:', error);
+							alert('Failed to create professional. Please try again.');
+					});
+	}
 
     return (
 			<S.MyModal
