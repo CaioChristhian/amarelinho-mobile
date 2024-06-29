@@ -18,7 +18,6 @@ export const InfoView = styled.View`
 `;
 export const ProfessionalInfo = styled.View`
   margin: 15px;
-  background-color: #fff;
   margin-top: 20px;
   border-radius: 10px;
 `;

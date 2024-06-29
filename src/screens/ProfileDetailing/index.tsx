@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
 import { PropsStack } from '../../routes/models';
-import { StarIcon } from '../../components/Icons/StarIcon';
 import * as S from './styles';
+import { Text } from '../../components/Text';
 import { PropsNavigationStack } from '../../routes/models';
 import api from '../../services/api';
 
@@ -15,64 +14,60 @@ export function ProfileDetailing() {
     const route = useRoute<ProfileDetailingRouteProp>();
     const { id } = route.params;
 
+    const [user, setUser] = useState({
+        average_rating: 0,
+        categories: '',
+        description: '',
+        email: '',
+        id: 0,
+        name: '',
+        phone: '',
+        total_ratings: '',
+        user_id: 0
+    });
+
     useEffect(() => {
         api.get(`/professional/${id}`).then(response => {
-            console.log("Entrou no Proficinal", response.data);
+            // console.log("Entrou no Proficinal", response.data);
+            const data = response.data;
+            setUser({
+                ...user,
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                description: data.description,
+                categories: data.categories.join(', '),
+                total_ratings: data.total_ratings,
+                average_rating: data.average_rating,
+            });
         }).catch(error => console.error('Erro ao buscar profissionais:', error));
     }, []);
 
-    const user = {
-        name: 'Marcos Silva',
-        phone: '123-456-7890',
-        biography: 'Um pedreiro com 20 anos de experiência que trabalha com todo tipo de construção e manutenção.',
-        occupation: 'Pedreiro',
-        value: "R$300/Diaria",
-        galleryImages: [
-            { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNoq1zTM-9JCnGrlFIvyZU-gW7KNvQc30AMcHEiCBLAA&s' },
-            { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNoq1zTM-9JCnGrlFIvyZU-gW7KNvQc30AMcHEiCBLAA&s' },
-            { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNoq1zTM-9JCnGrlFIvyZU-gW7KNvQc30AMcHEiCBLAA&s' },
-        ],
-        rating: 4.5,
-    };
+
 
     const handleChatRedirect = () => {
-		navigation.navigate('Chat');
-	};
+        navigation.navigate('Chat');
+    };
 
     return (
         <S.Container>
             <S.TitleText>Perfil do Usuário</S.TitleText>
             <S.ProfileView>
-                <S.ProfileImage source={{uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
+                <S.ProfileImage source={{ uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} />
                 <S.InfoView>
                     <S.NameText>{user.name}</S.NameText>
-                    <S.OccupationText>{user.occupation}</S.OccupationText>
-                    <S.RatingContainer>
-                        <StarIcon />
-                        <StarIcon />
-                        <StarIcon />
-                        <StarIcon />
-                        <StarIcon />
-                    </S.RatingContainer>
+                    <Text>{user.average_rating}|{user.total_ratings} avaliações</Text>
                 </S.InfoView>
             </S.ProfileView>
-            <S.ProfessionalInfo>
-                <S.InfoText>Contato:</S.InfoText>
-                <S.ValueText>{user.phone}</S.ValueText>
-                <S.InfoText>Descrição:</S.InfoText>
-                <S.ValueText>{user.biography}</S.ValueText>
-                <S.InfoText>Valor:</S.InfoText>
-                <S.ValueText>{user.value}</S.ValueText>
+            <S.ProfessionalInfo> 
+                <S.OccupationText>Informações:</S.OccupationText>
+                <S.ValueText>Telefone: {user.phone}</S.ValueText>
+                <S.ValueText>Email: {user.email}</S.ValueText>
+                <S.OccupationText>Serviços:</S.OccupationText>
+                <S.ValueText>{user.categories}</S.ValueText>
+                <S.OccupationText>Descrição:</S.OccupationText>
+                <S.ValueText>{user.description}</S.ValueText>
             </S.ProfessionalInfo>
-            <S.GalleryTitle>Galeria</S.GalleryTitle>
-            <FlatList
-                data={user.galleryImages}
-                horizontal
-                renderItem={({ item }) => (
-                    <S.GalleryImage source={item} />
-                )}
-                keyExtractor={(item, index) => index.toString()}
-            />
             <S.ButtonContainer>
                 <S.ServiceButton onPress={() => {/* código para solicitar serviço */ }}>
                     <S.ButtonText>Solicitar Serviço</S.ButtonText>
