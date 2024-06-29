@@ -12,7 +12,7 @@ export const Container = styled.ScrollView`
 export const Header = styled.View`
 	flex-direction: row;
 	align-items: center;
-	margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` :  '0'};
+	margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` : '0'};
 	justify-content: space-evenly;
 `;
 
@@ -24,7 +24,7 @@ export const HeaderTextContainer = styled.View`
 export const ImageProfile = styled.Image`
 	width: 72px;
 	height: 72px;
-	border-radius: ${72/2}px;
+	border-radius: ${72 / 2}px;
 `;
 
 export const Hottest = styled.View`
@@ -46,7 +46,7 @@ export const ProfessionalDetails = styled.View`
 export const ProfessionalImage = styled.Image`
 	height: 75px;
 	width: 75px;
-	border-radius: ${75/2}px;
+	border-radius: ${75 / 2}px;
 `;
 
 export const ProfessionalDescription = styled.View`
@@ -114,6 +114,7 @@ export const ProfessionalImageCard = styled.Image`
 `;
 
 export const ProfessionalInfo = styled.View`
+flex: 1;
 `;
 
 export const RatingContainer = styled.View`

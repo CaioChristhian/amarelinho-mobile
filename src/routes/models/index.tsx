@@ -6,7 +6,9 @@ export type PropsNavigationStack = {
 	Home: undefined;
 	Profile: undefined;
 	tab: undefined;
-	ProfileDetailing: undefined;
+	ProfileDetailing: {
+		id: number;
+	};
 	Settings: undefined;
 	Chat: undefined;
 	Search: undefined;

@@ -10,32 +10,22 @@ import { HeartIcon } from '../../components/Icons/HeartIcon';
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 
-interface ICategory {
-  id: number;
-  name: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-}
-
 export function Home(){
 	const { user } = useAuth()!; // Usando o hook para acessar a função de logout
 
 	const navigation = useNavigation<PropsStack>();
-	const [categories, setCategories] = useState<ICategory[]>([]);
+	const [professionals, setProfessionals] = useState<any>([]);
 
-	const handleProfileRedirect = () => {
-		navigation.navigate('ProfileDetailing');
+	const handleProfileRedirect = (id: number) => {
+		navigation.navigate('ProfileDetailing', { id });
 	};
 
-
-
-  useEffect(() => {
-    api.get('/category').then(response => {
-      console.log(response.data);
-      setCategories(response.data);
-    }).catch(error => console.error('Erro ao buscar categorias:', error));
-  }, []);
+	useEffect(() => {
+		api.get("/professional/").then(response => {
+			// console.log(response.data);
+			setProfessionals(response.data);
+		}).catch(error => console.error('Erro ao buscar profissionais:', error));
+	}, [professionals]);
 
 
 	return (
@@ -61,79 +51,36 @@ export function Home(){
 
 					<Text style={{ alignSelf: 'center', marginBottom: 12 }} weight='600' color='#FFF'>Faixa: 300 - 1200 / Diária</Text>
 					<View style={{ paddingHorizontal: 62 }}>
-						<S.Button onPress={() => console.log(categories?.length)}>
+						{/* <S.Button onPress={() => console.log(categories?.length)}>
 							<Text style={{ alignSelf: 'center' }} weight='600' color='#FFF'>Solicitar</Text>
-						</S.Button>
+						</S.Button> */}
 					</View>
 				</S.HottestBanners>
 			</S.Hottest>
 
 			<S.RecomendationContainer>
 				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
-
-				<S.ProfessionalList>
-						<View>
-						<TouchableOpacity onPress={handleProfileRedirect}>
-
+				<FlatList
+					data={professionals}
+					keyExtractor={item => item.id.toString()}
+					renderItem={({ item }) => (
+						<TouchableOpacity onPress={() => handleProfileRedirect(item.id)}>
 							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={{uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
-							<S.ProfessionalInfo>
-								<Text size={20} weight='600'>Dulce Vasconcelos</Text>
-								<Text size={18}>Jardineira</Text>
-								<S.RatingContainer>
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								</S.RatingContainer>
-							</S.ProfessionalInfo>
-							<HeartIcon />
-							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.0|70 avaliações</Text>
+								<S.ProfessionalImageCard source={{ uri: item.profile_picture }} />
+								<S.ProfessionalInfo>
+									<Text size={20} weight='600'>{item.name}</Text>
+									<Text size={18}>{item.description}</Text>
+									<S.RatingContainer>
+										{/* Assumindo que average_rating é um número e você deseja mostrar essa quantidade de estrelas */}
+										{[...Array(item.average_rating)].map((_, i) => <StarIcon key={i} />)}
+									</S.RatingContainer>
+								</S.ProfessionalInfo>
+								<HeartIcon style={{ position: 'absolute', right: 0, top: 0, margin: 8 }} />
+								<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>{item.average_rating}|{item.total_ratings} avaliações</Text>
 							</S.ProfessionalCard>
-							</TouchableOpacity>
-
-							<TouchableOpacity onPress={handleProfileRedirect}>
-
-							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={{uri: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
-							<S.ProfessionalInfo>
-								<Text size={20} weight='600'>Ian-Somel Gustavo</Text>
-								<Text size={18}>Pintor</Text>
-								<S.RatingContainer>
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								</S.RatingContainer>
-							</S.ProfessionalInfo>
-							<HeartIcon />
-							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>3.5|750 avaliações</Text>
-							</S.ProfessionalCard>
-							</TouchableOpacity>
-
-							<TouchableOpacity onPress={handleProfileRedirect}>
-
-							<S.ProfessionalCard>
-							<S.ProfessionalImageCard source={{uri: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}} />
-							<S.ProfessionalInfo>
-								<Text size={20} weight='600'>Jurica Alencar</Text>
-								<Text size={18}>Designer</Text>
-								<S.RatingContainer>
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								<StarIcon />
-								</S.RatingContainer>
-							</S.ProfessionalInfo>
-							<HeartIcon />
-							<Text style={{ position: 'absolute', right: 0, bottom: 0, margin: 8 }}>4.5|800 avaliações</Text>
-							</S.ProfessionalCard>
-							</TouchableOpacity>
-						</View>
-				</S.ProfessionalList>
+						</TouchableOpacity>
+					)}
+				/>
 			</S.RecomendationContainer>
 		</S.Container>
 	);

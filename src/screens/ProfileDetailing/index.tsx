@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import { PropsStack } from '../../routes/models';
 import { StarIcon } from '../../components/Icons/StarIcon';
 import * as S from './styles';
+import { PropsNavigationStack } from '../../routes/models';
+import api from '../../services/api';
+
+type ProfileDetailingRouteProp = RouteProp<PropsNavigationStack, 'ProfileDetailing'>;
 
 export function ProfileDetailing() {
     const navigation = useNavigation<PropsStack>();
+    const route = useRoute<ProfileDetailingRouteProp>();
+    const { id } = route.params;
+
+    useEffect(() => {
+        api.get(`/professional/${id}`).then(response => {
+            console.log("Entrou no Proficinal", response.data);
+        }).catch(error => console.error('Erro ao buscar profissionais:', error));
+    }, []);
 
     const user = {
         name: 'Marcos Silva',
