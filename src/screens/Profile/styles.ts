@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+		justifyContent: 'space-between'
   },
   userName: {
     fontSize: 24,
@@ -37,13 +38,17 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 40,
-    marginLeft: 'auto',
   },
   historyText: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
+	headerContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginBottom: 12
+	}
 });
 
 export default styles;

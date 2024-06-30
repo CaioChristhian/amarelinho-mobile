@@ -61,6 +61,9 @@ export function Home(){
 			<S.RecomendationContainer>
 				<Text weight='600' size={22} style={{ marginLeft: 16 }}>Recomendações</Text>
 				<FlatList
+					style={{
+						paddingBottom: 24
+					}}
 					data={professionals}
 					keyExtractor={item => item.id.toString()}
 					renderItem={({ item }) => (

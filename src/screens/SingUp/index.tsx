@@ -38,6 +38,10 @@ export function SingUp() {
 
 			<S.ImageLogo
       	source={logo}
+				style={{
+					width: 200,
+					height: 200
+				}}
 			/>
 
       <S.StyledInput

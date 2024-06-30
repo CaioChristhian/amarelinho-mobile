@@ -31,8 +31,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const ImageLogo = styled.Image`
-	width: 200;
-	height: 200;
+
 	margin-bottom: 24px;
 `;
 
