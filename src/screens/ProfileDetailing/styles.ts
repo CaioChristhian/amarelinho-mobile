@@ -5,6 +5,13 @@ export const Container = styled.View`
   padding: 10px;
   background-color: #FCF787;
 `;
+
+export const Header = styled.View`
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
 export const ProfileView = styled.View`
   padding: 10px;
   flex-direction: row;
@@ -62,6 +69,8 @@ export const TitleText = styled.Text`
   margin: 10px 0;
   text-align: center;
   align-self: center;
+	margin-right: auto;
+	margin-left: auto;
 `;
 export const GalleryTitle = styled.Text`
   font-size: 20px;
@@ -87,6 +96,9 @@ export const ChatButton = styled.TouchableOpacity`
     padding: 10px 20px;
     margin-left: 10px;
     border-radius: 5px;
+		flex-direction: row;
+		align-items: center;
+		gap: 4px;
 `;
 
 export const ButtonText = styled.Text`

@@ -105,12 +105,14 @@ export const ProfessionalCard = styled.View`
 	justify-content: space-around;
 	border-radius: 14px;
 	flex-direction: row;
+	align-items: center;
 `;
 
 export const ProfessionalImageCard = styled.Image`
-	height: 84px;
+	height: 120px;
 	width: 84px;
 	border-radius: 14px;
+	margin-right: 8px;
 `;
 
 export const ProfessionalInfo = styled.View`

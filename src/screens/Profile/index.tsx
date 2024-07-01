@@ -1,46 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, TouchableOpacity, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as ImageManipulator from 'expo-image-manipulator';
 
 import styles from './styles';
 import { useAuth } from '../../context/AuthContext';
 import { CreateProfessionalModal } from '../../components/CreateProfessionalModal/CreateProfessionalModal';
 import { Text } from '../../components/Text';
 import api from '../../services/api';
-import { IUserImage } from '../../types';
 
 export function Profile() {
+	const [isProfessional, setIsProfessional] = useState(false);
   const { user, logout } = useAuth()!;
   const [modalVisible, setModalVisible] = useState(false);
   const [userProfessional, setUserProfessional] = useState(null);
   const [imageUri, setImageUri] = useState<string | null>(null);
-	const [userImage, setUserImage] = useState<IUserImage | null>(null); // Estado tipado com IUserImage
-
-	const compressImage = async (uri: any) => {
-		const result = await ImageManipulator.manipulateAsync(
-			uri,
-			[{ resize: { width: 1000 } }], // Ajuste conforme necessário
-			{ compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
-		);
-		return result.uri;
-	};
+	const [professionalsData, setProfessionalsData] = useState<any>([]);
 
 
   useEffect(() => {
-    if (user?.id) {
-      api.get(`/professional`)
-        .then((response) => {
-          const professionals = response.data;
-          const matchedProfessional = professionals.find((prof: any) => prof.user_id === user.id);
-          setUserProfessional(matchedProfessional);
-        })
-        .catch(error => {
-          console.error('Failed to fetch professionals:', error);
-        });
+		const fetchProfessionalData = async () => {
+			if (user?.id) {
+				try {
+					// Primeira chamada API para buscar todos os profissionais
+					const response = await api.get(`/professional`);
+					const professionals = response.data;
+					const matchedProfessional = professionals.find((prof: any) => prof.user_id === user.id);
 
-    }
-  }, [user?.id]);
+					if (matchedProfessional) {
+						setUserProfessional(matchedProfessional);
+						setImageUri(matchedProfessional.profile_picture);
+						setIsProfessional(true)
+						// Segunda chamada API dependendo do resultado da primeira
+						const professionalDetailsResponse = await api.get(`/professional/${matchedProfessional.id}`);
+						const professionalDetails = professionalDetailsResponse.data;
+						setProfessionalsData(professionalDetails); // Atualiza o estado com os detalhes do profissional
+						console.log(professionalDetails);
+					} else {
+						setUserProfessional(null);
+						setIsProfessional(false)
+						setProfessionalsData([]); // Limpa os dados anteriores se não houver profissional correspondente
+					}
+				} catch (error) {
+					console.error('Failed to fetch professionals:', error);
+				}
+			}
+		};
+
+		fetchProfessionalData();
+	}, [user?.id, isProfessional]); // Adicionado userProfessional como dependência
+	 // Dependência para re-executar quando o ID do usuário mudar
+
+
 
   const handleToggleImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -99,12 +109,12 @@ export function Profile() {
 
 		try {
 			const response = await api.post('/user_images', formData, config);
-			Alert.alert("Success", "Image uploaded successfully!");
+			Alert.alert("Success", "Imagem alterada com sucesso!");
 			console.log(response);
 		} catch (error) {
 			console.error("Error uploading image: ", error);
 			Alert.alert("Error", "Failed to upload image.");
-			if (error.response) {
+			/* if (error.response) {
 				// The request was made and the server responded with a status code
 				// that falls out of the range of 2xx
 				console.log(error.response.data);
@@ -116,9 +126,14 @@ export function Profile() {
 			} else {
 				// Something happened in setting up the request that triggered an Error
 				console.log('Error', error.message);
-			}
+			} */
 		}
 	};
+
+	function handleProfessionalCreated() {
+		setModalVisible(false)
+		setIsProfessional(!isProfessional)
+	}
 
 
   return (
@@ -132,15 +147,22 @@ export function Profile() {
         </View>
         <View style={styles.userInfoContainer}>
           <View>
-            <Text style={styles.userName}>{user?.name || 'João Silva'}</Text>
-            <Text style={styles.userOccupation}>Designer</Text>
-            <View style={styles.ratingContainer}>
-              <Text style={styles.ratingText}>4.5</Text>
-            </View>
+            <Text style={styles.userName}>{user?.name}</Text>
+
+            {userProfessional && (
+							<>
+							<Text style={styles.userOccupation}>{professionalsData.description}</Text>
+							<View style={styles.ratingContainer}>
+              	<Text style={styles.ratingText}>{professionalsData.average_rating} | {professionalsData.total_ratings} avaliações</Text>
+            	</View>
+							</>
+						)}
+
+
           </View>
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <TouchableOpacity onPress={handleToggleImage} style={styles.avatar}>
-              <Image source={{ uri: imageUri || 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png' }} style={styles.avatar} />
+            <TouchableOpacity onPress={imageUri ? null : handleToggleImage} style={styles.avatar}>
+              <Image  source={{ uri: imageUri || 'https://www.kindpng.com/picc/m/264-2642043_galeria-de-fotos-circle-hd-png-download.png' }} style={styles.avatar} />
             </TouchableOpacity>
             {!userProfessional && (
               <TouchableOpacity onPress={() => setModalVisible(true)} style={{
@@ -156,9 +178,8 @@ export function Profile() {
             )}
           </View>
         </View>
-        <Text style={styles.historyText}>Histórico</Text>
       </View>
-      <CreateProfessionalModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
+      <CreateProfessionalModal isVisible={modalVisible} onClose={() => setModalVisible(false)} onConfirm={handleProfessionalCreated}/>
     </>
   );
 };

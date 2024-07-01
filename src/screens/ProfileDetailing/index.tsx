@@ -1,33 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
-import { PropsStack } from '../../routes/models';
+import { Professional, PropsStack } from '../../routes/models';
 import * as S from './styles';
 import { Text } from '../../components/Text';
 import { PropsNavigationStack } from '../../routes/models';
 import api from '../../services/api';
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableOpacity, Linking, Alert } from 'react-native';
 
 type ProfileDetailingRouteProp = RouteProp<PropsNavigationStack, 'ProfileDetailing'>;
 
 export function ProfileDetailing() {
     const navigation = useNavigation<PropsStack>();
     const route = useRoute<ProfileDetailingRouteProp>();
-    const { id } = route.params;
+    const { professional } = route.params;
 
-    const [user, setUser] = useState({
-        average_rating: 0,
-        categories: '',
-        description: '',
-        email: '',
-        id: 0,
-        name: '',
-        phone: '',
-        total_ratings: '',
-        user_id: 0
-    });
+    const [user, setUser] = useState<Professional>(professional);
 
-    useEffect(() => {
-        api.get(`/professional/${id}`).then(response => {
+
+    /* useEffect(() => {
+        api.get(`/professional/${professional.id}`).then(response => {
             // console.log("Entrou no Proficinal", response.data);
             const data = response.data;
             setUser({
@@ -41,39 +34,63 @@ export function ProfileDetailing() {
                 average_rating: data.average_rating,
             });
         }).catch(error => console.error('Erro ao buscar profissionais:', error));
-    }, []);
+    }, []); */
 
 
+		function handleChatRedirect() {
+				if (professional.phone) {
+						// Limpar o número de telefone para remover caracteres não numéricos
+						const phoneNumber = professional.phone.replace(/[^\d]/g, '');
+						const whatsappUrl = `whatsapp://send?phone=${phoneNumber}`;
 
-    const handleChatRedirect = () => {
-        navigation.navigate('Chat');
-    };
+						// Verificar se o dispositivo pode abrir o URL do WhatsApp
+						Linking.canOpenURL(whatsappUrl)
+								.then((supported) => {
+										if (supported) {
+												Linking.openURL(whatsappUrl);
+										} else {
+												Alert.alert('Erro', 'WhatsApp não está instalado');
+										}
+								})
+								.catch((err) => console.error('An error occurred', err));
+				} else {
+						Alert.alert('Erro', 'Número de telefone não disponível');
+				}
+		};
+
+
+		function handleGoback() {
+			navigation.goBack();
+		}
 
     return (
         <S.Container>
-            <S.TitleText>Perfil do Usuário</S.TitleText>
+						<S.Header>
+							<TouchableOpacity onPress={handleGoback}>
+								<Ionicons name='arrow-back-circle' size={28} />
+							</TouchableOpacity>
+            	<S.TitleText>Perfil do Usuário</S.TitleText>
+						</S.Header>
             <S.ProfileView>
-                <S.ProfileImage source={{ uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} />
+                <S.ProfileImage source={{ uri: professional.profile_picture || 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'}} />
                 <S.InfoView>
-                    <S.NameText>{user.name}</S.NameText>
-                    <Text>{user.average_rating}|{user.total_ratings} avaliações</Text>
+                    <S.NameText>{professional.name}</S.NameText>
+                    <Text>{professional.average_rating}|{professional.total_ratings} avaliações</Text>
                 </S.InfoView>
             </S.ProfileView>
-            <S.ProfessionalInfo> 
+            <S.ProfessionalInfo>
                 <S.OccupationText>Informações:</S.OccupationText>
-                <S.ValueText>Telefone: {user.phone}</S.ValueText>
-                <S.ValueText>Email: {user.email}</S.ValueText>
+                <S.ValueText>Telefone: {professional.phone}</S.ValueText>
+                <S.ValueText>Email: {professional.email}</S.ValueText>
                 <S.OccupationText>Serviços:</S.OccupationText>
-                <S.ValueText>{user.categories}</S.ValueText>
+                <S.ValueText>{professional.categories?.join(', ')}</S.ValueText>
                 <S.OccupationText>Descrição:</S.OccupationText>
-                <S.ValueText>{user.description}</S.ValueText>
+                <S.ValueText>{professional.description}</S.ValueText>
             </S.ProfessionalInfo>
             <S.ButtonContainer>
-                <S.ServiceButton onPress={() => {/* código para solicitar serviço */ }}>
-                    <S.ButtonText>Solicitar Serviço</S.ButtonText>
-                </S.ServiceButton>
                 <S.ChatButton onPress={handleChatRedirect}>
-                    <S.ButtonText>Chat</S.ButtonText>
+										<Ionicons name='logo-whatsapp' size={24} color='#FFFFFF' />
+                    <S.ButtonText>WhattsApp</S.ButtonText>
                 </S.ChatButton>
             </S.ButtonContainer>
         </S.Container>

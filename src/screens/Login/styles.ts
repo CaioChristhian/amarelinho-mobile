@@ -19,13 +19,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   input: {
+		backgroundColor: '#FFFFFF',
     width: '80%',
     height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 15,
     marginBottom: 10,
-    paddingHorizontal: 10,
+    padding: 10,
   },
   forgotPassword: {
     alignSelf: 'center',
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   registerText: {
-    color: 'blue',
+    color: '#0273BB',
   },
   socialButton: {
     width: '80%',

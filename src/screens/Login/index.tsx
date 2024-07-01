@@ -15,7 +15,6 @@ export function Login() {
 	const handleLogin = async () => {
     try {
       await login(email, password);
-      navigation.navigate("CreateProfessional");
     } catch (error) {
       console.error('Login failed:', error);
     }

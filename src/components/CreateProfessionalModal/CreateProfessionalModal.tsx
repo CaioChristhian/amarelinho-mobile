@@ -10,30 +10,45 @@ import { useAuth } from '../../context/AuthContext';
 interface ModalProps {
 	isVisible: boolean;
 	onClose: () => void;
+	onConfirm?: () => void;
 }
 
-export function CreateProfessionalModal({ isVisible, onClose}: ModalProps) {
+export function CreateProfessionalModal({ isVisible, onClose, onConfirm}: ModalProps) {
 		const [phoneNumber, setPhoneNumber] = useState('');
 		const [description, setDescription] = useState('');
 
 		const {user} = useAuth()!;
 
 
-		function handleCreateProfessional() {
+		async function handleCreateProfessional() {
 			const professionalData = {
 					phoneNumber,
 					description,
 					userId: user?.id
 			};
 
-			api.post('/professional', professionalData)
+			await api.post('/professional', professionalData)
 					.then(response => {
 							console.log('Professional created successfully:', response.data);
-							onClose(); // Close modal on success
+							onConfirm!(); // Close modal on success
 					})
 					.catch(error => {
 							console.error('Error creating professional:', error);
 							alert('Failed to create professional. Please try again.');
+
+							if (error.response) {
+								// The request was made and the server responded with a status code
+								// that falls out of the range of 2xx
+								console.log(error.response.data);
+								console.log(error.response.status);
+								console.log(error.response.headers);
+							} else if (error.request) {
+								// The request was made but no response was received
+								console.log(error.request);
+							} else {
+								// Something happened in setting up the request that triggered an Error
+								console.log('Error', error.message);
+							}
 					});
 	}
 

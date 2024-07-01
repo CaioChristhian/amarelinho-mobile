@@ -46,3 +46,27 @@ export const Input = styled.TextInput`
 	padding-left: 14px;
 `;
 
+export const ProfessionalCard = styled.View`
+	margin-top: 24px;
+	background-color: #FFF;
+	padding: 16px;
+	justify-content: space-around;
+	border-radius: 14px;
+	flex-direction: row;
+	align-items: center;
+`;
+
+export const ProfessionalImageCard = styled.Image`
+	height: 120px;
+	width: 84px;
+	border-radius: 14px;
+	margin-right: 8px;
+`;
+
+export const ProfessionalInfo = styled.View`
+flex: 1;
+`;
+
+export const RatingContainer = styled.View`
+	flex-direction: row;
+`;
